@@ -1,51 +1,39 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-/* alertnative
-function Food(props) {
-  return <h1>{props.fav}</h1>;
-} */
-function Food({ name, rating }) {
-  return (
-    <div>
-      <h2>I like {name}</h2>
-      <h3>Rating: {rating}/5.0</h3>
-    </div>
-  );
-}
+class App extends React.Component {
+  state = {
+    count: 0,
+  };
+  plus = () => {
+    console.log("plus");
 
-Food.propTypes = {
-  name: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
-};
+    // "Do not mutate state directly. Use setState()"
+    // setState() automatically calls render()
+    // Mutating state directly does not calls render()
+    // this.state.count = this.state.count + 1;
 
-const foodILike = [
-  {
-    id: 1,
-    name: "name1",
-    rating: 4.0,
-  },
-  {
-    id: 2,
-    name: "name2",
-    rating: 2.3,
-  },
-  {
-    id: 3,
-    name: "name3",
-    rating: 4.5,
-  },
-];
+    // Use this.state.~~ is not recommended
+    // this.setState({ count: this.state.count + 1 });
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Hello!</h1>
-      {foodILike.map((dish) => (
-        <Food key={dish.id} name={dish.name} rating={dish.rating} />
-      ))}
-    </div>
-  );
+    // Best practice
+    this.setState((current) => ({ count: current.count + 1 }));
+  };
+  minus = () => {
+    console.log("minus");
+
+    this.setState((current) => ({ count: current.count - 1 }));
+  };
+  render() {
+    return (
+      <>
+        <h1>I'm a class component!</h1>
+        <h2>count: {this.state.count}</h2>
+        <button onClick={this.plus}>+</button>
+        <button onClick={this.minus}>-</button>
+      </>
+    );
+  }
 }
 
 export default App;
