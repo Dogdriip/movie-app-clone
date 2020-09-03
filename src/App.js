@@ -2,36 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log("Constructor!");
-  }
-
   state = {
-    count: 0,
-  };
-  plus = () => {
-    this.setState((current) => ({ count: current.count + 1 }));
-  };
-  minus = () => {
-    this.setState((current) => ({ count: current.count - 1 }));
+    isLoading: true,
   };
 
   componentDidMount() {
-    console.log("Component is mounted!");
-  }
-  componentDidUpdate() {
-    console.log("Component is updated!");
+    setTimeout(() => {
+      this.setState({ isLoading: false, movies: [] });
+    }, 6000);
   }
 
   render() {
-    console.log("I'm updating!");
+    const { isLoading } = this.state;
     return (
       <>
-        <h1>I'm a class component!</h1>
-        <h2>count: {this.state.count}</h2>
-        <button onClick={this.plus}>+</button>
-        <button onClick={this.minus}>-</button>
+        <h1>{isLoading ? "Loading..." : "Ready!"}</h1>
       </>
     );
   }
