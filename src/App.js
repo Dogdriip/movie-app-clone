@@ -2,29 +2,30 @@ import React from "react";
 import PropTypes from "prop-types";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log("Constructor!");
+  }
+
   state = {
     count: 0,
   };
   plus = () => {
-    console.log("plus");
-
-    // "Do not mutate state directly. Use setState()"
-    // setState() automatically calls render()
-    // Mutating state directly does not calls render()
-    // this.state.count = this.state.count + 1;
-
-    // Use this.state.~~ is not recommended
-    // this.setState({ count: this.state.count + 1 });
-
-    // Best practice
     this.setState((current) => ({ count: current.count + 1 }));
   };
   minus = () => {
-    console.log("minus");
-
     this.setState((current) => ({ count: current.count - 1 }));
   };
+
+  componentDidMount() {
+    console.log("Component is mounted!");
+  }
+  componentDidUpdate() {
+    console.log("Component is updated!");
+  }
+
   render() {
+    console.log("I'm updating!");
     return (
       <>
         <h1>I'm a class component!</h1>
